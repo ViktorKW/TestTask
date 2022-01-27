@@ -2,24 +2,31 @@
 #define UNIT_H
 
 #include <QObject>
-#include <QDebug>
 
 class Unit : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(bool clickability READ clickability WRITE setClickability NOTIFY clickabilityChanged)
+    Q_PROPERTY(bool isClickable READ isClickable WRITE setIsClickable NOTIFY isClickableChanged)
+    Q_PROPERTY(bool isShip READ isShip WRITE setIsShip NOTIFY isShipChanged)
 public:
-    explicit Unit(QObject *parent = nullptr);
-    bool clickability();
+    explicit Unit(const bool &isShip = false, const bool &isClickable = true);
+    ~Unit();
+
+    bool isClickable();
+    bool isShip();
 
 signals:
-    void clickabilityChanged();
+    void isClickableChanged();
+    void isShipChanged();
 
 public slots:
-     void setClickability(bool clickability);
-
+    void setIsClickable(bool& v);
+    void setIsShip(bool& v);
 private:
-    bool m_clickability;
+    bool m_isClickable;
+    bool m_isShip;       //represents water and ship tiles
+                         //true = isShip,
+                         //false = water
 };
 
 #endif // UNIT_H

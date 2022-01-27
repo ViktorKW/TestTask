@@ -19,6 +19,9 @@ set(PROJECT_SOURCES
         qml.qrc
         unit.cpp
         unit.h
+        unitlist.cpp
+        unitlist.h
+        datafile.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

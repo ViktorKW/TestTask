@@ -1,22 +1,46 @@
 #include "unit.h"
 
-Unit::Unit(QObject *parent)
-    : QObject{parent},
-      m_clickability{true}
-{
 
+
+Unit::Unit(const bool &isShip, const bool &isClickable):
+            m_isShip(isShip),
+            m_isClickable(isClickable)
+{
+    qDebug("unit created");
 }
 
-bool Unit::clickability()
+Unit::~Unit()
 {
-    return m_clickability;
+    qDebug("unit destroyed");
 }
 
-void Unit::setClickability(bool clickability)
+bool Unit::isClickable()
 {
-    if(m_clickability != clickability)
-    {
-        m_clickability = clickability;
-        emit clickabilityChanged();
+    return m_isClickable;
+}
+
+bool Unit::isShip()
+{
+    return m_isShip;
+}
+
+void Unit::setIsClickable(bool& v)
+{
+    qDebug("------------");
+    qDebug("This Field is no longer clickable!\n");
+    m_isClickable = v;
+    emit isClickableChanged();
+}
+
+void Unit::setIsShip(bool& v)
+{
+    if(m_isShip){
+        qDebug("Hit!");
+        qDebug("------------\n");
+        m_isShip = v;   //turning ship into water to record win condition
+    }
+    else{
+        qDebug("Miss!");
+        qDebug("------------\n");
     }
 }
